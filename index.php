@@ -11,7 +11,7 @@
 </header>
 <main>
 <br>
-<form action="register.php" method="POST">
+<form action="register.php" method="POST" class="form">
     <label for="user">Felhasználó:</label><br>
     <input type="text" id="user" name="user"
      pattern="^[^;]*$" maxlength="50" required><br>
@@ -21,7 +21,7 @@
     <input type="submit" value="Regisztrál">
 </form>
 <br>
-<form action="login.php" method="POST">
+<form action="login.php" method="POST" class="form">
     <label for="user">Felhasználó:</label><br>
     <input type="text" id="user" name="user"
      pattern="^[^;]*$" maxlength="50" required><br>

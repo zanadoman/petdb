@@ -16,7 +16,7 @@
     <div style="display: flex">
         <div style="margin: 0 auto auto auto;">
         <h3>Új állat</h3>
-        <form action="add.php" method="POST">
+        <form action="add.php" method="POST" class="form">
             <input type="hidden" id="user" name="user" value=<?=$user?>>
             <label for="name">Név:</label><br>
             <input type="text" id="name" name="name" maxlength="50" required><br>
@@ -56,8 +56,8 @@
             if (1 < count($fields)):
         ?>
         <tr>
-            <td><?php echo $fields[0] ?><td>
-            <td><?php echo $fields[1] ?><td>
+            <td><?php echo $fields[0]; ?><td>
+            <td><?php echo $fields[1]; ?><td>
             <td style="width: 17vw;">
                 <img src=<?=$fields[2]?> style="width: 15vw;">
             </td>
@@ -82,7 +82,7 @@
     </form>
 <?php else: ?>
     <?php foreach ($errors as $error): ?> 
-        <p><?php echo $error ?></p>
+        <p><?php echo "<h3>" . $error . "</h3>" ?></p>
     <?php endforeach; ?>
     <form action="index.php">
         <input type="submit" value="Vissza">
