@@ -3,7 +3,7 @@
     $index = $_POST["index"];
 
     $errors = [];
-    $file = $user . ".txt";
+    $file = "db/" . $user . ".txt";
 
     if (file_exists($file))
     {

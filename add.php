@@ -5,12 +5,15 @@
     $img = $_POST["img"];
 
     $errors = [];
-    $file = $user . ".txt";
+    $file = "db/" . $user . ".txt";
     $entry = $name . ";" . $species . ";" . $img . "\n";
 
     if (file_exists($file))
     {
-        file_put_contents($file, file_get_contents($file) . $entry);
+        if (!str_contains(file_get_contents($file), $entry))
+        {
+            file_put_contents($file, file_get_contents($file) . $entry);
+        }
     } 
     else
     {

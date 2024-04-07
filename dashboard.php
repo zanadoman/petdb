@@ -45,10 +45,9 @@
             <th>Név<th>
             <th>Faj<th>
             <th>Kép<th>
-            <td><td>
         </tr>
         <?php
-            $file = $user . ".txt";
+            $file = "db/" . $user . ".txt";
             $index = 0;
             if (file_exists($file)):
             foreach (explode("\n", file_get_contents($file)) as $line):
@@ -62,7 +61,7 @@
                 <img src=<?=$fields[2]?> style="width: 15vw;">
             </td>
             <td style="width: 3vw;">
-                <form action="del.php" method="POST">
+                <form action="delete.php" method="POST">
                     <input type="hidden" id="user" name="user" value=<?=$user?>>
                     <input type="hidden" id="index" name="index" value=<?=$index++?>>
                     <input type="submit" value="Törlés">
@@ -76,7 +75,8 @@
         ?>
         </table>
         </div>
-    </div><br>
+    </div>
+    <br>
     <form action="index.php">
         <input type="submit" value="Kijelentkezés">
     </form>
