@@ -1,0 +1,16 @@
+table
+{
+    width: 40vw;
+    background-color: lightgray;
+    border: 2px solid black;
+    border-radius: 0.5vw;
+    box-shadow: 0.1vw 0.1vw 0.1vw;
+}
+
+.img
+{
+    width: 15vw;
+    border: 1px solid black;
+    box-shadow: 0.05vw 0.05vw 0.05vw;
+    border-radius: 0.5vw;
+}

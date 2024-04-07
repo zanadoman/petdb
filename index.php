@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header></header>
+<header>
+    <br><p><h1>Állattár</h1><p><br>
+</header>
 <main>
 <br>
 <form action="register.php" method="POST">
@@ -30,6 +32,8 @@
 </form>
 <br>
 </main>
-<footer></footer>
+<footer>
+    <br><p>Zana Domán, 2024</p><br>
+</footer>
 </body>
 </html>

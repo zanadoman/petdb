@@ -2,10 +2,11 @@
     $user = $_POST["user"];
     $name = $_POST["name"];
     $species = $_POST["species"];
+    $img = $_POST["img"];
 
     $errors = [];
     $file = $user . ".txt";
-    $entry = $name . ";" . $species . "\n";
+    $entry = $name . ";" . $species . ";" . $img . "\n";
 
     if (file_exists($file))
     {
