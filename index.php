@@ -7,7 +7,7 @@
 </head>
 <body>
 <header>
-    <br><p><h1>Állattár</h1><p><br>
+    <br><h1>Állattár</h1><br>
 </header>
 <main>
 <br>
