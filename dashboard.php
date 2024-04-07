@@ -77,14 +77,14 @@
         </div>
     </div>
     <br>
-    <form action="index.php">
+    <form action="index.html">
         <input type="submit" value="Kijelentkezés">
     </form>
 <?php else: ?>
     <?php foreach ($errors as $error): ?> 
         <p><?php echo "<h3>" . $error . "</h3>" ?></p>
     <?php endforeach; ?>
-    <form action="index.php">
+    <form action="index.html">
         <input type="submit" value="Vissza">
     </form>
 <?php endif; ?>
