@@ -1,6 +1,7 @@
 <?php
     session_start();
     $_SESSION["user"] = null;
+    $_SESSION["pets"] = [];
     $_SESSION["pwd"] = null;
 ?>
 <!DOCTYPE html>
@@ -18,21 +19,17 @@
 <br>
 <form action="register.php" method="POST" class="form">
     <label for="user">Felhasználó:</label><br>
-    <input type="text" id="user" name="user"
-     pattern="^[^ ;]*$" maxlength="50" required><br>
+    <input type="text" id="user" name="user" maxlength="50" required><br>
     <label for="pwd">Jelszó:</label><br>
-    <input type="password" id="pwd" name="pwd" 
-     pattern="^[^ ;]*$" minlength="8" maxlength="50" required><br>
+    <input type="password" id="pwd" name="pwd" minlength="8" maxlength="50" required><br>
     <input type="submit" value="Regisztrál">
 </form>
 <br>
 <form action="login.php" method="POST" class="form">
     <label for="user">Felhasználó:</label><br>
-    <input type="text" id="user" name="user"
-     pattern="^[^ ;]*$" maxlength="50" required><br>
+    <input type="text" id="user" name="user" maxlength="50" required><br>
     <label for="pwd">Jelszó:</label><br>
-    <input type="password" id="pwd" name="pwd" 
-     pattern="^[^ ;]*$" minlength="8" maxlength="50" required><br>
+    <input type="password" id="pwd" name="pwd" minlength="8" maxlength="50" required><br>
     <input type="submit" value="Bejelentkezés">
 </form>
 <br>

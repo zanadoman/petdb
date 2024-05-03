@@ -1,8 +1,8 @@
 <?php 
     session_start();
     
-if ((!isset($_SESSION["user"]) || $_SESSION["user"] == null) &&
-    (!isset($_SESSION["error"]) || $_SESSION["error"] == null)) {
+    if ((!isset($_SESSION["user"]) || $_SESSION["user"] == null) &&
+        (!isset($_SESSION["error"]) || $_SESSION["error"] == null)) {
         $user = null;
         $error = "Érvénytelen hozzáférés";
     } else {
