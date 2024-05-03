@@ -2,28 +2,25 @@
     $user = $_POST["user"];
     $pwd = $_POST["pwd"];
 
-    $errors = [];
-    $contents = "";
-
-    if (file_exists("users.txt"))
-    {
-        $contents = file_get_contents("users.txt");
-
-        foreach (explode("\n", $contents) as $line)
-        {
-            if (explode(";", $line)[0] === $user)
-            {
-                $errors[] = "Felhasználónév foglalt";
-
-                break;
-            }
-        }
+    $conn = new mysqli("localhost", "root", "12345678", "petdb");
+    if ($conn->connect_error) {
+        die($conn->connect_error);
     }
 
-    if (count($errors) === 0)
-    {
-        file_put_contents("users.txt", $contents . $user . ";" . $pwd . "\n");
+    if ($conn->query("SELECT * FROM users WHERE name LIKE '$user'")->num_rows !== 0) {
+        $conn->close();
+        die("Foglalt felhasználónév");
     }
 
-    include_once "dashboard.php";
+    if (!$conn->query("INSERT INTO users (name, password) VALUES ('$user', '$pwd')")) {
+        $conn->close();
+        die("Sikertelen regisztráció");
+    }
+    
+    $conn->close();
+
+    session_start();
+    $_SESSION["user"] = $user;
+
+    require_once "dashboard.php";
 ?>
