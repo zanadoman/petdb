@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    $_SESSION["user"] = null;
+    $_SESSION["pwd"] = null;
+?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>

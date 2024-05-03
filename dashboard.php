@@ -1,3 +1,15 @@
+<?php 
+    session_start();
+    
+if ((!isset($_SESSION["user"]) || $_SESSION["user"] == null) &&
+    (!isset($_SESSION["error"]) || $_SESSION["error"] == null)) {
+        $user = null;
+        $error = "Érvénytelen hozzáférés";
+    } else {
+        $user = $_SESSION["user"];
+        $error = $_SESSION["error"];
+    }
+?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -11,8 +23,8 @@
 </header>
 <main>
 <br>
-<?php if (count($errors) === 0): ?>
-    <h2><?php echo "Üdv " . $user ?></h2>
+<?php if ($user != null): ?>
+    <h2>Üdv <?=$_SESSION["user"]?></h2>
     <div style="display: flex">
         <div style="margin: 0 auto auto auto;">
         <h3>Új állat</h3>
@@ -77,16 +89,12 @@
         </div>
     </div>
     <br>
-    <form action="index.html">
+    <form action="index.php">
         <input type="submit" value="Kijelentkezés">
     </form>
 <?php else: ?>
-    <?php foreach ($errors as $error): ?> 
-        <p><?php echo "<h3>" . $error . "</h3>" ?></p>
-    <?php endforeach; ?>
-    <form action="index.html">
-        <input type="submit" value="Vissza">
-    </form>
+    <h3><?=$error?></h3>
+    <form action="index.php"><input type="submit" value="Vissza"></form>
 <?php endif; ?>
 <br>
 </main>
