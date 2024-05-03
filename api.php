@@ -2,13 +2,16 @@
     session_start();
 
     if (!isset($_SESSION["user"]) || $_SESSION["user"] == null) {
-        header("Location: dashboard.php");
+        $_SESSION["error"] = "Érvénytelen hozzáférés";
+        header("Location: error.php");
+        exit;
     }
 
     $conn = new mysqli("localhost", "root", "12345678", "petdb");
     if ($conn->connect_error) {
-        $_SESSION["error"] = $conn->connect_error; 
-        header("Location: dashboard.php");
+        $_SESSION["error"] = "Adatbázis hiba";
+        header("Location: error.php");
+        exit;
     }
 
     switch ($_SERVER['REQUEST_METHOD']) {
@@ -30,12 +33,19 @@
 
     function get_pets($conn, $user) {
         $_SESSION["pets"] = [];
+        $_SESSION["species"] = [];
 
         $result = $conn->query("SELECT id, name, species_id, image " . 
                                "FROM pets WHERE user_name LIKE '$user'");
 
         while ($pet = $result->fetch_assoc()) {
             $_SESSION["pets"] = json_encode($pet);
+        }
+
+        $result = $conn->query("SELECT * FROM species");
+
+        while ($species = $result->fetch_assoc()) {
+            $_SESSION["species"] = json_encode($species);
         }
     }
 

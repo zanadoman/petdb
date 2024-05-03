@@ -1,8 +1,8 @@
 <?php
     session_start();
-
     $_SESSION["user"] = null;
     $_SESSION["pets"] = [];
+    $_SESSION["species"] = [];
     $_SESSION["error"] = null;
 
     $user = $_POST["user"];
@@ -10,17 +10,21 @@
 
     $conn = new mysqli("localhost", "root", "12345678", "petdb");
     if ($conn->connect_error) {
-        $_SESSION["error"] = $conn->connect_error;
-        header("Location: api.php");
+        $_SESSION["error"] = "Adatbázis hiba";
+        header("Location: error.php");
+        exit;
     }
-    
+
     if ($conn->query("SELECT * FROM users WHERE name LIKE '$user'")->num_rows !== 0) {
+        $conn->close();
         $_SESSION["error"] = "Foglalt felhasználónév";
-    } else {
-        $conn->query("INSERT INTO users (name, password) VALUES ('$user', '$pwd')");
-        $_SESSION["user"] = $user;
+        header("Location: error.php");
+        exit;
     }
-    
+ 
+    $conn->query("INSERT INTO users (name, password) VALUES ('$user', '$pwd')");
     $conn->close();
+
+    $_SESSION["user"] = $user;
     header("Location: api.php");
 ?>
