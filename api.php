@@ -45,15 +45,11 @@
         $species_id = $pet["species_id"];
         $image = $pet["image"];
 
-        if (!$conn->query("INSERT INTO pets (user_name, name, species_id, image) " . 
-                          "VALUES ('$user_name', '$name', '$species_id', '$image')")) {
-            $_SESSION["error"] = $conn->error;
-        }
+        $conn->query("INSERT INTO pets (user_name, name, species_id, image) " . 
+                     "VALUES ('$user_name', '$name', '$species_id', '$image')");
     }
 
     function delete_pet($conn, $id) {
-        if (!$conn->query("DELETE FROM pets WHERE id = $id")) {
-            $_SESSION["error"] = $conn->error;
-        }
+        $conn->query("DELETE FROM pets WHERE id = $id");
     }
 ?>
