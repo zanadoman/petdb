@@ -3,7 +3,7 @@
 <html lang="hu">
 <head>
     <meta charset="utf-8">
-    <title>Irányítópult</title>
+    <title>Hiba</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
