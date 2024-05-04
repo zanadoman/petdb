@@ -45,8 +45,11 @@
         $_SESSION["pets"] = [];
         $_SESSION["species"] = [];
 
-        $result = $conn->query("SELECT id, name, species_id, image " . 
-                               "FROM pets WHERE user_name LIKE '$user'");
+        $result = $conn->query(
+            "SELECT pets.id, pets.name, species.name AS species, pets.image " . 
+            "FROM pets INNER JOIN species ON pets.species_id = species.id " . 
+            "WHERE user_name LIKE '$user'"
+        );
 
         while ($pet = $result->fetch_assoc()) {
             $_SESSION["pets"][] = $pet;

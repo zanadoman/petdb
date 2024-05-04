@@ -50,9 +50,7 @@
         <?php foreach($_SESSION["pets"] as $line): ?>
         <tr>
             <td><?=$line["name"]?></td>
-            <td>
-                <?=array_column($_SESSION["species"], "name", "id")[$line["species_id"]]?>
-            </td>
+            <td><?=$line["species"]?></td>
             <td style="width: 15vw;">
                 <img src=<?=$line["image"]?> style="width: 15vw;">
             </td>
