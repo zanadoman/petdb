@@ -41,7 +41,7 @@
     </div>
     <div style="margin: 0 auto auto auto">
         <h3>Állatok</h3>
-        <table style="width: 35vw">
+        <table style="width: 30vw">
         <tr>
             <th>Név</th>
             <th>Faj</th>
@@ -53,10 +53,10 @@
             <td>
                 <?=array_column($_SESSION["species"], "name", "id")[$line["species_id"]]?>
             </td>
-            <td style="width: 17vw;">
+            <td style="width: 15vw;">
                 <img src=<?=$line["image"]?> style="width: 15vw;">
             </td>
-            <td style="width: 3vw;">
+            <td style="width: 4vw;">
                 <form action="api.php" method="POST">
                 <input type="hidden" name="id" value="<?=$line["id"]?>">
                 <input type="submit" name="delete" value="Törlés">
