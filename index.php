@@ -1,8 +1,6 @@
 <?php
     session_start();
     $_SESSION["user"] = null;
-    $_SESSION["pets"] = [];
-    $_SESSION["species"] = [];
     $_SESSION["error"] = null;
 ?>
 <!DOCTYPE html>

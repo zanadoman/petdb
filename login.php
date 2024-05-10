@@ -1,8 +1,6 @@
 <?php
     session_start();
     $_SESSION["user"] = null;
-    $_SESSION["pets"] = [];
-    $_SESSION["species"] = [];
     $_SESSION["error"] = null;
 
     $user = $_POST["user"];
@@ -11,7 +9,7 @@
     try {
         $conn = new mysqli("localhost", "root", "12345678", "petdb");
     } catch (Exception $e) {
-        $_SESSION["error"] = "Adatbázis hiba";
+        $_SESSION["error"] = "Szerver hiba";
         header("Location: error.php");
         exit;
     }
@@ -19,7 +17,7 @@
     try {
         $result = $conn->query("SELECT password FROM users WHERE name LIKE '$user'");
     } catch (Exception $e) {
-        $_SESSION["error"] = "Adatbázis hiba";
+        $_SESSION["error"] = "Szerver hiba";
         header("Location: error.php");
         exit;
     }
