@@ -14,7 +14,9 @@ function fill_pets(pets) {
                 <td style="width: 15vw;">
                     <img src="${element.image}" style="width: 15vw;">
                 </td>
-                <td style="width: 4vw;">
+                <td style="width: 6vw;">
+                    <input type="button" onclick="PUT(${element.id})" value="Módosítás">
+                    <br>
                     <input type="button" onclick="DELETE(${element.id})" value="Törlés">
                 </td>
             </tr>
@@ -55,6 +57,10 @@ function GET_pets() {
                 window.alert(`Érvénytelen munkament`);
             break;
 
+            case 403:
+                window.alert(`Hozzáférés megtagadva`);
+            break;
+
             case 500:
                 window.alert(`Szerver hiba`);
             break;
@@ -90,6 +96,10 @@ function GET_species() {
 
             case 401:
                 window.alert(`Érvénytelen munkament`);
+            break;
+
+            case 403:
+                window.alert(`Hozzáférés megtagadva`);
             break;
 
             case 500:
@@ -130,6 +140,10 @@ function POST() {
                 window.alert(`Érvénytelen munkament`);
             break;
 
+            case 403:
+                window.alert(`Hozzáférés megtagadva`);
+            break;
+
             case 500:
                 window.alert(`Szerver hiba`);
             break;
@@ -143,6 +157,57 @@ function POST() {
     }
 
     xhr.send(new FormData(document.getElementById(`new`)));
+}
+
+function PUT(id) {
+    let xhr = new XMLHttpRequest();
+
+    xhr.open(`PUT`, `http://localhost/api.php`);
+    xhr.onload = function() {
+        if (xhr.readyState !== 4) {
+            return;
+        }
+
+        switch (xhr.status) {
+            case 200:
+                window.alert("Sikeres módosítás");
+                location.reload();
+            break;
+
+            case 400:
+                window.alert(`Érvénytelen kérés`);
+            break;
+
+            case 401:
+                window.alert(`Érvénytelen munkament`);
+            break;
+
+            case 403:
+                window.alert(`Hozzáférés megtagadva`);
+            break;
+
+            case 422:
+                window.alert(`Hibás adat(ok)`);
+            break;
+
+            case 500:
+                window.alert(`Szerver hiba`);
+            break;
+
+            default:
+                window.alert(`Ismeretlen hiba`);
+            break;
+        }
+
+        console.log(`DELETE: " + ${xhr.status}`);
+    }
+
+    xhr.send(JSON.stringify({
+        id: id,
+        name: prompt(`Név:`),
+        species_name: prompt(`Faj:`),
+        image: prompt(`Kép url:`)
+    }));
 }
 
 function DELETE(id) {
@@ -166,6 +231,10 @@ function DELETE(id) {
 
             case 401:
                 window.alert(`Érvénytelen munkament`);
+            break;
+
+            case 403:
+                window.alert(`Hozzáférés megtagadva`);
             break;
 
             case 500:
