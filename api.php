@@ -69,9 +69,12 @@
 
     function new_pet($conn) {
         $user_name = $_SESSION["user"];
-        $name = $_POST["name"];
-        $species_id = $_POST["species_id"];
-        $image = $_POST["image"];
+
+        $data = json_decode(file_get_contents("php://input"), true);
+
+        $name = $data["name"];
+        $species_id = $data["species_id"];
+        $image = $data["image"];
 
         try {
             $conn->query("INSERT INTO pets (user_name, name, species_id, image) " . 
@@ -130,8 +133,9 @@
     }
 
     function delete_pet($conn) {
-        $id = $_GET["id"]; 
         $user_name = $_SESSION["user"];
+
+        $id = json_decode(file_get_contents("php://input"), true)["id"];
 
         try {
             $conn->query("SELECT * FROM pets WHERE id = $id AND user_name = '$user_name'");

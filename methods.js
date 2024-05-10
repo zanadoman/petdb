@@ -156,7 +156,9 @@ function POST() {
         console.log(`POST: ${xhr.status}`);
     }
 
-    xhr.send(new FormData(document.getElementById(`new`)));
+    xhr.send(JSON.stringify(
+        Object.fromEntries(new FormData(document.getElementById(`new`)))
+    ));
 }
 
 function PUT(id) {
@@ -213,7 +215,7 @@ function PUT(id) {
 function DELETE(id) {
     let xhr = new XMLHttpRequest();
 
-    xhr.open(`DELETE`, `http://localhost/api.php?id=${id}`);
+    xhr.open(`DELETE`, `http://localhost/api.php`);
     xhr.onload = function() {
         if (xhr.readyState !== 4) {
             return;
@@ -249,5 +251,5 @@ function DELETE(id) {
         console.log(`DELETE: " + ${xhr.status}`);
     }
 
-    xhr.send();
+    xhr.send(JSON.stringify({id: id}));
 }
