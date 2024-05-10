@@ -37,5 +37,5 @@
     }
 
     $_SESSION["user"] = $user;
-    header("Location: api.php");
+    header("Location: dashboard.php");
 ?>

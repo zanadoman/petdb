@@ -1,24 +1,148 @@
-let pets = [];
-
 function init() {
-    GET();
-
-
+    GET_pets();
+    GET_species();
 }
 
-function GET() {
+function fill_pets(pets) {
+    let content = document.getElementById(`pets`);
+
+    pets.forEach(element => 
+        content.innerHTML += `
+            <tr>
+                <td>${element.name}</td>
+                <td>${element.species}</td>
+                <td style="width: 15vw;">
+                    <img src="${element.image}" style="width: 15vw;">
+                </td>
+                <td style="width: 4vw;">
+                    <input type="button" onclick="DELETE(${element.id})" value="Törlés">
+                </td>
+            </tr>
+        `
+    );
+}
+
+function fill_species(species) {
+    let content = document.getElementById(`species`);
+
+    species.forEach(element =>
+        content.innerHTML += `
+            <input type="radio" name="species_id" value="${element.id}" required>
+            <label>${element.name}</label><br>
+        `
+    );
+}
+
+function GET_pets() {
     let xhr = new XMLHttpRequest();
 
-    xhr.open(`GET`, `http://localhost/api.php`);
+    xhr.open(`GET`, `http://localhost/api.php?pets`);
     xhr.onload = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            JSON.parse(xhr.response).data.forEach(element => pets.push(element));
+        if (xhr.readyState !== 4) {
+            return;
         }
 
-        console.log(`GET: RESPONSE: ${xhr.status}`);
+        switch (xhr.status) {
+            case 200:
+                fill_pets(JSON.parse(xhr.response));
+            break;
+
+            case 400:
+                window.alert(`Érvénytelen kérés`);
+            break;
+
+            case 401:
+                window.alert(`Érvénytelen munkament`);
+            break;
+
+            case 500:
+                window.alert(`Szerver hiba`);
+            break;
+
+            default:
+                window.alert(`Ismeretlen hiba`);
+            break;
+        }
+
+        console.log(`GET: ${xhr.status}`);
     }
 
-    xhr.send(null);
+    xhr.send();
+}
+
+function GET_species() {
+    let xhr = new XMLHttpRequest();
+
+    xhr.open(`GET`, `http://localhost/api.php?species`);
+    xhr.onload = function() {
+        if (xhr.readyState !== 4) {
+            return;
+        }
+
+        switch (xhr.status) {
+            case 200:
+                fill_species(JSON.parse(this.response));
+            break;
+
+            case 400:
+                window.alert(`Érvénytelen kérés`);
+            break;
+
+            case 401:
+                window.alert(`Érvénytelen munkament`);
+            break;
+
+            case 500:
+                window.alert(`Szerver hiba`);
+            break;
+
+            default:
+                window.alert(`Ismeretlen hiba`);
+            break;
+        }
+
+        console.log(`GET: ${xhr.status}`);
+    }
+
+    xhr.send();
+}
+
+function POST() {
+    let xhr = new XMLHttpRequest();
+
+    xhr.open(`POST`, `http://localhost/api.php`);
+    xhr.onload = function() {
+        if (xhr.readyState !== 4) {
+            return;
+        }
+
+        switch (xhr.status) {
+            case 200:
+                window.alert("Sikeres hozzáadás");
+                location.reload();
+            break;
+
+            case 400:
+                window.alert(`Érvénytelen kérés`);
+            break;
+
+            case 401:
+                window.alert(`Érvénytelen munkament`);
+            break;
+
+            case 500:
+                window.alert(`Szerver hiba`);
+            break;
+
+            default:
+                window.alert(`Ismeretlen hiba`);
+            break;
+        }
+
+        console.log(`POST: ${xhr.status}`);
+    }
+
+    xhr.send(new FormData(document.getElementById(`new`)));
 }
 
 function DELETE(id) {
@@ -26,14 +150,35 @@ function DELETE(id) {
 
     xhr.open(`DELETE`, `http://localhost/api.php?id=${id}`);
     xhr.onload = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            window.alert(`Sikeres törlés`);
-        } else {
-            window.alert(`Sikertelen törlés`);
+        if (xhr.readyState !== 4) {
+            return;
         }
 
-        console.log(`DELETE: id=${id} + " RESPONSE: " + ${xhr.status}`);
+        switch (xhr.status) {
+            case 200:
+                window.alert("Sikeres törlés");
+                location.reload();
+            break;
+
+            case 400:
+                window.alert(`Érvénytelen kérés`);
+            break;
+
+            case 401:
+                window.alert(`Érvénytelen munkament`);
+            break;
+
+            case 500:
+                window.alert(`Szerver hiba`);
+            break;
+
+            default:
+                window.alert(`Ismeretlen hiba`);
+            break;
+        }
+
+        console.log(`DELETE: " + ${xhr.status}`);
     }
 
-    xhr.send(null);
+    xhr.send();
 }

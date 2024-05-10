@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="methods.js"></script>
 </head>
-<body>
+<body onload="init()">
 <header>
     <br><h1>Állattár</h1><br>
 </header>
@@ -25,48 +25,28 @@
 <div style="display: flex">
     <div style="margin: 0 auto auto auto;">
         <h3>Új állat</h3>
-        <form action="api.php" method="POST" class="form">
+        <form id="new" class="form">
         <label>Név:</label><br>
         <input type="text" name="name" maxlength="50" required><br>
         <label>Faj</label><br>
-        <div style="width: max-content; margin: auto; text-align: left;">
-        <?php foreach($_SESSION["species"] as $line): ?>
-        <input type="radio" name="species_id" value="<?=$line["id"]?>" required>
-        <label><?=$line["name"]?></label><br>
-        <?php endforeach; ?>
+        <div id="species" style="width: max-content; margin: auto; text-align: left;">
         </div>
         <label>Kép url:</label><br>
         <input type="text" name="image" maxlength="500" required><br>
-        <input type="submit" name="post" value="Hozzáad">
+        <input type="button" onclick="POST()" value="Hozzáad">
         </form>
     </div>
     <div style="margin: 0 auto auto auto">
         <h3>Állatok</h3>
-        <table style="width: 30vw">
+        <table id="pets" style="width: 30vw">
         <tr>
             <th>Név</th>
             <th>Faj</th>
             <th>Kép</th>
         </tr>
-        <?php foreach($_SESSION["pets"] as $line): ?>
-        <tr>
-            <td><?=$line["name"]?></td>
-            <td><?=$line["species"]?></td>
-            <td style="width: 15vw;">
-                <img src=<?=$line["image"]?> style="width: 15vw;">
-            </td>
-            <td style="width: 4vw;">
-                <input type="button" onclick="DELETE(<?=$line["id"]?>)" value="Törlés">
-            </td>
-        </tr>
-        <?php endforeach; ?>
         </table>
     </div>
 </div>
-<br>
-<form action="api.php" method="GET">
-    <input type="submit" value="Frissítés">
-</form>
 <br>
 <form action="index.php">
     <input type="submit" value="Kijelentkezés">
