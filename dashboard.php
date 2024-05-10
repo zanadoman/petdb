@@ -13,6 +13,7 @@
     <meta charset="utf-8">
     <title>Irányítópult</title>
     <link rel="stylesheet" href="style.css">
+    <script src="methods.js"></script>
 </head>
 <body>
 <header>
@@ -55,10 +56,7 @@
                 <img src=<?=$line["image"]?> style="width: 15vw;">
             </td>
             <td style="width: 4vw;">
-                <form action="api.php" method="POST">
-                <input type="hidden" name="id" value="<?=$line["id"]?>">
-                <input type="submit" name="delete" value="Törlés">
-                </form>
+                <input type="button" onclick="DELETE(<?=$line["id"]?>)" value="Törlés">
             </td>
         </tr>
         <?php endforeach; ?>

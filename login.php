@@ -8,21 +8,29 @@
     $user = $_POST["user"];
     $pwd = $_POST["pwd"];
 
-    $conn = new mysqli("localhost", "root", "12345678", "petdb");
-    if ($conn->connect_error) {
+    try {
+        $conn = new mysqli("localhost", "root", "12345678", "petdb");
+    } catch (Exception $e) {
         $_SESSION["error"] = "Adatbázis hiba";
         header("Location: error.php");
         exit;
     }
-    
-    $result = $conn->query("SELECT password FROM users WHERE name LIKE '$user'");
-    $conn->close();
 
-    if ($result->num_rows == 0) {
+    try {
+        $result = $conn->query("SELECT password FROM users WHERE name LIKE '$user'");
+    } catch (Exception $e) {
+        $_SESSION["error"] = "Adatbázis hiba";
+        header("Location: error.php");
+        exit;
+    }
+
+    if ($result->num_rows === 0) {
         $_SESSION["error"] = "Hibás felhasználónév";
         header("Location: error.php");
         exit;
-    } elseif ($pwd !== $result->fetch_assoc()["password"]) {
+    }
+
+    if ($result->fetch_assoc()["password"] !== $pwd) {
         $_SESSION["error"] = "Hibás jelszó";
         header("Location: error.php");
         exit;
