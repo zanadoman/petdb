@@ -51,7 +51,9 @@
     }
 
     function get_species($conn) {
-        echo json_encode($conn->query("SELECT * FROM species")->fetch_all(MYSQLI_ASSOC));
+        $result = $conn->query("SELECT * FROM species");
+
+        echo json_encode($result->fetch_all(MYSQLI_ASSOC));
         http_response_code(200);
     }
 

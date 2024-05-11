@@ -14,22 +14,20 @@ function fill_pets(pets) {
         </tr>
     `;
 
-    pets.forEach(element => 
-        content.innerHTML += `
-            <tr>
-                <td>${element.name}</td>
-                <td>${element.species}</td>
-                <td style="width: 15vw;">
-                    <img src="${element.image}" style="width: 15vw;">
-                </td>
-                <td style="width: 6vw;">
-                    <input type="button" onclick="PUT(${element.id})" value="Módosítás">
-                    <br>
-                    <input type="button" onclick="DELETE(${element.id})" value="Törlés">
-                </td>
-            </tr>
-        `
-    );
+    pets.forEach(element => content.innerHTML += `
+        <tr>
+            <td>${element.name}</td>
+            <td>${element.species}</td>
+            <td style="width: 15vw;">
+                <img src="${element.image}">
+            </td>
+            <td style="width: 5vw;">
+                <input type="button" onclick="PUT(${element.id})" value="Módosít">
+                <br>
+                <input type="button" onclick="DELETE(${element.id})" value="Töröl">
+            </td>
+        </tr>
+    `);
 }
 
 function fill_species(species) {
@@ -125,6 +123,7 @@ function POST() {
     let xhr = new XMLHttpRequest();
 
     xhr.open(`POST`, `http://localhost/api.php`);
+
     xhr.onload = function() {
         if (xhr.readyState !== 4) {
             return;

@@ -1,6 +1,5 @@
 <?php 
     session_start();
-    
     if (!isset($_SESSION["user"])) {
         $_SESSION["error"] = "Érvénytelen munkamenet";
         header("Location: error.php");
@@ -38,13 +37,12 @@
     </div>
     <div style="margin: 0 auto auto auto">
         <h3>Állatok</h3>
-        <table id="pets" style="width: 30vw"></table>
+        <table id="pets" style="width: 30vw">
+        </table>
     </div>
 </div>
 <br>
-<form action="index.php">
-    <input type="submit" value="Kijelentkezés">
-</form>
+<form action="index.php"><input type="submit" value="Kijelentkezés"></form>
 <br>
 </main>
 <footer>
