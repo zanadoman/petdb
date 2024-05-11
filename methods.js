@@ -18,8 +18,8 @@ function fill_pets(pets) {
         <tr>
             <td>${element.name}</td>
             <td>${element.species}</td>
-            <td style="width: 15vw;">
-                <img src="${element.image}">
+            <td>
+                <img src="${element.image}" style="width: 15vw;">
             </td>
             <td style="width: 5vw;">
                 <input type="button" onclick="PUT(${element.id})" value="Módosít">
