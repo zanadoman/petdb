@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php
+    session_start();
+
+    if (!isset($_SESSION["error"])) {
+        $_SESSION["error"] = "Ismeretlen hiba";
+    } 
+?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>

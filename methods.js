@@ -6,6 +6,14 @@ function init() {
 function fill_pets(pets) {
     let content = document.getElementById(`pets`);
 
+    content.innerHTML = `
+        <tr>
+            <th>Név</th>
+            <th>Faj</th>
+            <th>Kép</th>
+        </tr>
+    `;
+
     pets.forEach(element => 
         content.innerHTML += `
             <tr>
@@ -27,6 +35,8 @@ function fill_pets(pets) {
 function fill_species(species) {
     let content = document.getElementById(`species`);
 
+    content.innerHTML = ``;
+
     species.forEach(element =>
         content.innerHTML += `
             <input type="radio" name="species_id" value="${element.id}" required>
@@ -39,6 +49,7 @@ function GET_pets() {
     let xhr = new XMLHttpRequest();
 
     xhr.open(`GET`, `http://localhost/api.php?pets`);
+
     xhr.onload = function() {
         if (xhr.readyState !== 4) {
             return;
@@ -57,10 +68,6 @@ function GET_pets() {
                 window.alert(`Érvénytelen munkament`);
             break;
 
-            case 403:
-                window.alert(`Hozzáférés megtagadva`);
-            break;
-
             case 500:
                 window.alert(`Szerver hiba`);
             break;
@@ -70,7 +77,7 @@ function GET_pets() {
             break;
         }
 
-        console.log(`GET: ${xhr.status}`);
+        console.log(`GET_pets: ${xhr.status}`);
     }
 
     xhr.send();
@@ -80,6 +87,7 @@ function GET_species() {
     let xhr = new XMLHttpRequest();
 
     xhr.open(`GET`, `http://localhost/api.php?species`);
+
     xhr.onload = function() {
         if (xhr.readyState !== 4) {
             return;
@@ -98,10 +106,6 @@ function GET_species() {
                 window.alert(`Érvénytelen munkament`);
             break;
 
-            case 403:
-                window.alert(`Hozzáférés megtagadva`);
-            break;
-
             case 500:
                 window.alert(`Szerver hiba`);
             break;
@@ -111,7 +115,7 @@ function GET_species() {
             break;
         }
 
-        console.log(`GET: ${xhr.status}`);
+        console.log(`GET_species: ${xhr.status}`);
     }
 
     xhr.send();
@@ -129,7 +133,7 @@ function POST() {
         switch (xhr.status) {
             case 200:
                 window.alert("Sikeres hozzáadás");
-                location.reload();
+                GET_pets();
             break;
 
             case 400:
@@ -140,8 +144,8 @@ function POST() {
                 window.alert(`Érvénytelen munkament`);
             break;
 
-            case 403:
-                window.alert(`Hozzáférés megtagadva`);
+            case 422:
+                window.alert(`Hibás adat(ok)`);
             break;
 
             case 500:
@@ -165,6 +169,7 @@ function PUT(id) {
     let xhr = new XMLHttpRequest();
 
     xhr.open(`PUT`, `http://localhost/api.php`);
+
     xhr.onload = function() {
         if (xhr.readyState !== 4) {
             return;
@@ -173,7 +178,7 @@ function PUT(id) {
         switch (xhr.status) {
             case 200:
                 window.alert("Sikeres módosítás");
-                location.reload();
+                GET_pets();
             break;
 
             case 400:
@@ -216,6 +221,7 @@ function DELETE(id) {
     let xhr = new XMLHttpRequest();
 
     xhr.open(`DELETE`, `http://localhost/api.php`);
+
     xhr.onload = function() {
         if (xhr.readyState !== 4) {
             return;
@@ -224,7 +230,7 @@ function DELETE(id) {
         switch (xhr.status) {
             case 200:
                 window.alert("Sikeres törlés");
-                location.reload();
+                GET_pets();
             break;
 
             case 400:
@@ -237,6 +243,10 @@ function DELETE(id) {
 
             case 403:
                 window.alert(`Hozzáférés megtagadva`);
+            break;
+
+            case 422:
+                window.alert(`Hibás adat(ok)`);
             break;
 
             case 500:

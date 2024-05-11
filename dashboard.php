@@ -1,7 +1,7 @@
 <?php 
     session_start();
     
-    if (!isset($_SESSION["user"]) || $_SESSION["user"] == null) {
+    if (!isset($_SESSION["user"])) {
         $_SESSION["error"] = "Érvénytelen munkamenet";
         header("Location: error.php");
         exit;
@@ -38,13 +38,7 @@
     </div>
     <div style="margin: 0 auto auto auto">
         <h3>Állatok</h3>
-        <table id="pets" style="width: 30vw">
-        <tr>
-            <th>Név</th>
-            <th>Faj</th>
-            <th>Kép</th>
-        </tr>
-        </table>
+        <table id="pets" style="width: 30vw"></table>
     </div>
 </div>
 <br>
